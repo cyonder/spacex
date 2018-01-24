@@ -1,0 +1,68 @@
+$color-background: #141D26;
+$color-brand: #3580B5;
+$color-border: #000000;
+$color-header: #253446;
+$color-text: #FFFFFF;
+
+body{
+    background: $color-background;
+    color: $color-text;
+    font-family: 'Open Sans', sans-serif;
+
+    // background-image: url("/images/mars.jpg");
+}
+
+.app{
+    // min-height: 100vh;
+}
+
+.wrapper{
+    width: 980px;
+    // background: pink;
+    margin: auto;
+}
+
+header{
+    background-color: $color-header;
+    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    height: 75px;
+    display: flex;
+    // align-items: center;
+}
+
+.logo{
+    background-image: url("/images/logo.png");
+    width: 198px;
+    height: 25px;
+    display: inline-block;
+}
+
+nav{
+    display: inline-block;
+    // background: pink;
+    & > a{
+        margin-right: 25px;
+        &:last-child{ margin-right: 0 }
+    }
+}
+
+main{}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // background: pink
+}
+
+// Over-writing Spectre
+
+a{
+    color: $color-brand;
+    &:hover, &:focus, &:active{
+        text-decoration: none;
+        color: darken($color-brand, 10%);
+        box-shadow: none;
+    }
+}
