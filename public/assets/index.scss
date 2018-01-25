@@ -1,8 +1,9 @@
 $color-background: #141D26;
 $color-brand: #3580B5;
-$color-border: #000000;
+$color-border: #213D55;
 $color-header: #253446;
 $color-text: #FFFFFF;
+$color-grey: #839199;
 
 body{
     background: $color-background;
@@ -12,48 +13,196 @@ body{
     // background-image: url("/images/mars.jpg");
 }
 
-.app{
-    // min-height: 100vh;
-}
+.app{}
 
 .wrapper{
-    width: 980px;
-    // background: pink;
+    width: 960px;
     margin: auto;
 }
 
 header{
     background-color: $color-header;
-    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
     height: 75px;
     display: flex;
-    // align-items: center;
+    border-bottom: 1px solid $color-brand;
+    z-index: 2;
+    position: relative;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo{
-    background-image: url("/images/logo.png");
-    width: 198px;
-    height: 25px;
-    display: inline-block;
+    a{
+        background-image: url("/images/logo.png");
+        width: 198px;
+        height: 25px;
+        display: inline-block;
+    }
 }
 
-nav{
+nav.web-nav{
     display: inline-block;
-    // background: pink;
     & > a{
         margin-right: 25px;
         &:last-child{ margin-right: 0 }
     }
 }
 
+nav.mobile-nav-toggle{
+    display: none;
+}
+
 main{}
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.main{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
-    // background: pink
+// FACTS
+
+.facts{
+    text-align: center;
+    display: flex;
+}
+
+.fact{
+    box-shadow: 0 0 5px rgba(0,0,0,.6);
+    border: 1px solid $color-border;
+    background: $color-header;
+    padding: 5px;
+    margin-right: 10px;
+    width: 100%;
+    &:last-child{ margin-right: 0 }
+}
+
+.fact-title{
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
+    text-shadow: 1px 1px 3px rgba(255,255,255,0.1);
+}
+
+.fact-detail{
+    // color: rgba(255,255,255,0.8);
+}
+
+// PAGES
+
+#about, #dates, #rockets, #pads{
+    background: $color-header;
+    padding: 15px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    border-bottom: 1px solid $color-brand;
+}
+
+#index{}
+
+// COUNT DOWN
+
+.time{
+    margin: auto;
+    text-align: center;
+    height: 64px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: 0 2px 3px rgba(0,0,0,.6);
+    margin-bottom: 5px;
+
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+
+.time-text{
+    width: 200px;
+}
+.time-text-1{
+    display: block;
+}
+.time-text-2{
+    display: block;
+}
+
+.time-0{
+    width:60%;
+    background: rgba(37,52,70,0.2);
+}
+.time-1{
+    width: 80%;
+    background: rgba(37,52,70,0.4);
+}
+.time-2{
+    // background: rgba(37,52,70,1);
+    background: $color-brand;
+    width: 100%;
+}
+.time-3{
+    background: rgba(37,52,70,0.8);
+    width: 80%;
+}
+.time-4{
+    background: rgba(37,52,70,0.6);
+    width: 60%;
+}
+
+.time-icon{
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    margin-right: 20px;
+}
+
+.time-icon-0,
+.time-icon-1{
+    background-image: url("/images/satellite.png");
+}
+
+.time-icon-2{
+    background-image: url("/images/liftoff.png");
+}
+
+.time-icon-3,
+.time-icon-4{
+    background-image: url("/images/onpad.png");
+}
+
+.timer{
+    margin-top: 20px;
+    // background: yellow;
+    display: flex;
+    height: calc(100vh - 201px);
+    align-items: center;
+    justify-content: center;
+}
+
+.count-down{
+    // background: peachpuff;
+    width: 80%;
+}
+
+// GAME
+
+.rocket{
+    background-image: url("/images/falcon-9.png");
+    background-size: 20px 260px;
+    width: 20px;
+    height: 260px;
+    position: absolute;
+    bottom: -200px;
+    left: calc((100vw - 980px)/4);
+    transition: all 3s ease-in-out 0.5s;
+    cursor: pointer;
+
+    &:hover{
+        bottom: 800px;
+    }
 }
 
 // Over-writing Spectre
@@ -62,7 +211,146 @@ a{
     color: $color-brand;
     &:hover, &:focus, &:active{
         text-decoration: none;
-        color: darken($color-brand, 10%);
+        color: $color-grey;
+        // color: darken($color-brand, 10%);
         box-shadow: none;
+    }
+}
+
+// Selected active class
+
+.selected{
+    color: $color-grey !important;
+}
+nav.stroke a.selected:after{
+    width: 100%;
+}
+
+// Nav Stroke Effect
+
+nav a,
+nav a:after,
+nav a:before {
+    transition: all .5s;
+}
+nav.stroke a{
+    position: relative;
+}
+nav.stroke a:after{
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: $color-grey;
+    height: 1px;
+}
+nav.stroke a:hover:after{
+    width: 100%;
+}
+
+// MOBILE NAV
+
+.mobile-nav{
+    background: #FFFFFF;
+    // flex-direction: column;
+    border-bottom: 2px solid $color-header;
+    position: absolute;
+    width: 100%;
+    // display: flex;
+
+    transform: translateY(-100%);
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+
+    a{
+        display: block;
+        padding: 10px 5% 10px 5%;
+        &:hover, &:focus, &:active{
+            color: $color-header;
+            background: #EAEAEA;
+        }
+    }
+}
+
+.mobile-nav.is-open{
+    transform: translateY(0%);
+    transition: all 0.3s ease-in-out;
+}
+
+header.is-open{
+    border-bottom: 0;
+}
+
+.mobile-nav-toggle{
+    width: 50px;
+    height: 50px;
+    // background: pink;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    span,
+    span:before,
+    span:after{
+        content: "";
+        display: block;
+        height: 2px;
+        background: $color-text;
+        width: 100%;
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+    }
+
+    span:before{ top: 10px }
+    span:after{
+        bottom: 10px;
+    }
+
+    &.is-open span{
+        background: transparent;
+    }
+
+    &.is-open span:before,
+    &.is-open span:after{
+        transform-origin: center;
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    &.is-open span:after{
+        transform: rotate(-45deg);
+    }
+}
+
+// Media
+
+@media(max-width: 1000px){
+    .wrapper{
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+@media(max-width: 768px){
+    nav.web-nav{
+        display: none;
+    }
+    nav.mobile-nav-toggle{
+        display: flex;
+    }
+    .facts{
+        flex-wrap: wrap;
+    }
+    .fact{
+        margin-right: 0;
+        width: 50%;
+    }
+    .time-icon{
+        display: none;
     }
 }
