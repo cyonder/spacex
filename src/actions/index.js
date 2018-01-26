@@ -4,7 +4,9 @@ import {
     ROOT_API_URL,
     FETCH_COMPANY_INFO,
     FETCH_PAST_LAUNCHES,
-    FETCH_UPCOMING_LAUNCHES
+    FETCH_UPCOMING_LAUNCHES,
+    FETCH_ROCKETS,
+    FETCH_PADS
 } from '../constants';
 
 export const fetchCompanyInfoSuccess = (companyInfo) => {
@@ -25,6 +27,20 @@ export const fetchUpcomingLaunchesSuccess = (launches) => {
     return {
         type: FETCH_UPCOMING_LAUNCHES,
         payload: launches
+    }
+}
+
+export const fetchRocketsSuccess = (rockets) => {
+    return {
+        type: FETCH_ROCKETS,
+        payload: rockets
+    }
+}
+
+export const fetchPadsSuccess = (pads) => {
+    return {
+        type: FETCH_PADS,
+        payload: pads
     }
 }
 
@@ -53,6 +69,26 @@ export const fetchUpcomingLaunches = (callback) => {
         axios.get(`${ROOT_API_URL}/launches/upcoming`)
             .then(response => {
                 dispatch( fetchUpcomingLaunchesSuccess(response.data) );
+            })
+            .then( () => callback() )
+    }
+}
+
+export const fetchRockets = (callback) => {
+    return dispatch => {
+        axios.get(`${ROOT_API_URL}/rockets`)
+            .then(response => {
+                dispatch( fetchRocketsSuccess(response.data) );
+            })
+            .then( () => callback() )
+    }
+}
+
+export const fetchPads = (callback) => {
+    return dispatch => {
+        axios.get(`${ROOT_API_URL}/launchpads`)
+            .then(response => {
+                dispatch( fetchPadsSuccess(response.data) );
             })
             .then( () => callback() )
     }

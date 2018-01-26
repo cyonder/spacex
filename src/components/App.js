@@ -8,11 +8,14 @@ import About from './pages/About';
 import Dates from './pages/Dates';
 import Rockets from './pages/Rockets';
 import Pads from './pages/Pads';
+import Launch from './pages/Launch';
 
 import {
     fetchCompanyInfo,
     fetchPastLaunches,
     fetchUpcomingLaunches,
+    fetchRockets,
+    fetchPads
 } from '../actions';
 
 const NoMatch = () => {
@@ -25,8 +28,8 @@ const Loading = () => {
 
 const Links = () => {
     return [
-        <NavLink to="/about"   activeClassName="selected" key={1}>About SpaceX</NavLink>,
-        <NavLink to="/dates"   activeClassName="selected" key={2}>Launch Dates</NavLink>,
+        <NavLink to="/about"   activeClassName="selected" key={1}>About</NavLink>,
+        <NavLink to="/dates"   activeClassName="selected" key={2}>Launches</NavLink>,
         <NavLink to="/rockets" activeClassName="selected" key={3}>Rockets</NavLink>,
         <NavLink to="/pads"    activeClassName="selected" key={4}>Launch Pads</NavLink>,
     ]
@@ -35,11 +38,13 @@ const Links = () => {
 const Routes = (props) => {
     return (
         <Switch>
-            <Route path="/" exact  render={ () => <Index   { ...props } /> } key={1}/>,
-            <Route path="/about"   render={ () => <About   { ...props } /> } key={2}/>,
-            <Route path="/dates"   render={ () => <Dates   { ...props } /> } key={3}/>,
-            <Route path="/rockets" render={ () => <Rockets { ...props } /> } key={4}/>,
-            <Route path="/pads"    render={ () => <Pads    { ...props } /> } key={5}/>,
+            <Route path="/" exact      render={ () => <Index   { ...props } /> } key={1}/>,
+            <Route path="/about"       render={ () => <About   { ...props } /> } key={2}/>,
+            <Route path="/dates"       render={ () => <Dates   { ...props } /> } key={3}/>,
+            <Route path="/rockets"     render={ () => <Rockets { ...props } /> } key={4}/>,
+            <Route path="/pads"        render={ () => <Pads    { ...props } /> } key={5}/>,
+            <Route path="/launch/:id"  render={ () => <Launch  { ...props } /> } key={6}/>,
+            <Route component={NoMatch} />
         </Switch>
     )
 }
@@ -60,7 +65,11 @@ class App extends Component{
         this.props.fetchCompanyInfo(() => {
             this.props.fetchPastLaunches(() => {
                 this.props.fetchUpcomingLaunches(() => {
-                    this.setState({ loading: false })
+                    this.props.fetchRockets(() => {
+                        this.props.fetchPads(() => {
+                            this.setState({ loading: false })
+                        })
+                    })
                 });
             });
         });
@@ -72,11 +81,13 @@ class App extends Component{
 
     render(){
         console.log("App-props: ", this.props);
+
         const { loading } = this.state;
         const isOpen = this.state.toggleNav ? "is-open" : "";
+        const activeClass = this.props.location.pathname === "/" ? "home-page" : "";
 
         return(
-            <div className="app">
+            <div className={`app ${activeClass}`}>
                 <header>
                     <div className="header wrapper">
                         <div className="logo text-hide">
@@ -97,7 +108,6 @@ class App extends Component{
                     <div className="main wrapper">
                         { !loading ? <Routes { ...this.props } /> : <Loading /> }
                     </div>
-                    <div className=""></div>
                 </main>
             </div>
         )
@@ -109,12 +119,18 @@ const mapStateToProps = (state) => {
         companyInfo: state.companyInfo,
         pastLaunches: state.launches.pastLaunches,
         upcomingLaunches: state.launches.upcomingLaunches,
+        rockets: state.rockets,
+        pads: state.pads
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        fetchCompanyInfo, fetchPastLaunches, fetchUpcomingLaunches,
+        fetchCompanyInfo,
+        fetchPastLaunches,
+        fetchUpcomingLaunches,
+        fetchRockets,
+        fetchPads
     }, dispatch)
 }
 

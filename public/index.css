@@ -3,6 +3,18 @@ body {
   color: #FFFFFF;
   font-family: 'Open Sans', sans-serif; }
 
+.google-maps {
+  position: relative;
+  padding-bottom: 40%;
+  margin-top: 20px; }
+
+.home-page {
+  background-image: url("/images/mars.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 100vw;
+  height: 100vh; }
+
 .wrapper {
   width: 960px;
   margin: auto; }
@@ -60,11 +72,100 @@ nav.mobile-nav-toggle {
   color: rgba(0, 0, 0, 0.6);
   text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.1); }
 
-#about, #dates, #rockets, #pads {
+.about-wrapper, #dates, .rocket-wrapper, .pad-wrapper, .launch-wrapper {
   background: #253446;
   padding: 15px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid #3580B5; }
+  border-bottom: 1px solid #3580B5;
+  opacity: 0.8; }
+
+#about {
+  font-weight: 300;
+  text-align: center; }
+
+#dates {
+  font-size: 12px;
+  padding: 15px; }
+
+.launch-wrapper,
+.about-wrapper {
+  margin-top: 20px; }
+
+.rocket-wrapper, .pad-wrapper {
+  margin-bottom: 20px; }
+  .rocket-wrapper:last-child, .pad-wrapper:last-child {
+    margin-bottom: 0; }
+
+.section {
+  margin-top: 10px;
+  font-size: 14px; }
+
+.weigth-title {
+  color: #839199;
+  font-weight: 400;
+  margin-bottom: 10px;
+  display: inline-block; }
+
+.section-name {
+  color: #839199; }
+
+.rocket-name, .pad-name {
+  color: #3580B5;
+  font-weight: 300; }
+
+.pad-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.pad-location {
+  color: #839199;
+  font-size: 14px;
+  margin-bottom: 10px; }
+
+.falcon-9-img {
+  background-image: url("/images/falcon-9.png");
+  background-repeat: no-repeat;
+  background-size: 60px 780px;
+  width: 60px;
+  height: 780px;
+  position: absolute;
+  opacity: 0.3;
+  left: calc((100vw - 960px)/6);
+  top: 150px; }
+
+.falcon-heavy-img {
+  background-image: url("/images/falcon-heavy.png");
+  background-repeat: no-repeat;
+  background-size: 180px 780px;
+  width: 180px;
+  height: 780px;
+  position: absolute;
+  opacity: 0.3;
+  right: calc((100vw - 960px)/6);
+  top: 150px; }
+
+.video {
+  display: flex;
+  justify-content: center; }
+  .video iframe {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6); }
+
+.launch-details {
+  margin-top: 20px; }
+
+.time-toggle {
+  margin-top: 20px;
+  width: 152px; }
+
+.btn-brand {
+  color: #FFFFFF;
+  background: #3580B5;
+  border-color: #213D55; }
+  .btn-brand:hover, .btn-brand:focus, .btn-brand:active, .btn-brand.active {
+    background: #24567a;
+    border-color: #213D55;
+    box-shadow: none; }
 
 .time {
   margin: auto;
@@ -128,25 +229,12 @@ nav.mobile-nav-toggle {
 .timer {
   margin-top: 20px;
   display: flex;
-  height: calc(100vh - 201px);
+  height: calc(100vh - 257px);
   align-items: center;
   justify-content: center; }
 
 .count-down {
   width: 80%; }
-
-.rocket {
-  background-image: url("/images/falcon-9.png");
-  background-size: 20px 260px;
-  width: 20px;
-  height: 260px;
-  position: absolute;
-  bottom: -200px;
-  left: calc((100vw - 980px)/4);
-  transition: all 3s ease-in-out 0.5s;
-  cursor: pointer; }
-  .rocket:hover {
-    bottom: 800px; }
 
 a {
   color: #3580B5; }
@@ -154,6 +242,32 @@ a {
     text-decoration: none;
     color: #839199;
     box-shadow: none; }
+
+.table tr:last-child > td {
+  border-bottom: 0; }
+
+.table {
+  table-layout: fixed; }
+
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 0; }
+
+.table th {
+  border-bottom-color: #3580B5; }
+
+.table-data {
+  cursor: pointer; }
+  .table-data:hover {
+    background: #24567a; }
+
+.table.table-striped tbody tr:nth-of-type(odd) {
+  background: #e1e7ef;
+  color: #333; }
+  .table.table-striped tbody tr:nth-of-type(odd):hover {
+    background: #24567a; }
 
 .selected {
   color: #839199 !important; }
@@ -253,4 +367,9 @@ header.is-open {
     margin-right: 0;
     width: 50%; }
   .time-icon {
+    display: none; } }
+
+@media (max-width: 960px) {
+  .falcon-heavy-img,
+  .falcon-9-img {
     display: none; } }

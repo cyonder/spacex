@@ -7,13 +7,30 @@ $color-grey: #839199;
 
 body{
     background: $color-background;
+    // background: black;
     color: $color-text;
     font-family: 'Open Sans', sans-serif;
 
     // background-image: url("/images/mars.jpg");
+    // background-size: 100vw;
+    // background-repeat: no-repeat;
+}
+
+.google-maps {
+    position: relative;
+    padding-bottom: 40%; // This is the aspect ratio
+    margin-top: 20px;
 }
 
 .app{}
+
+.home-page{
+    background-image: url("/images/mars.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100vw;
+    height: 100vh;
+}
 
 .wrapper{
     width: 960px;
@@ -93,16 +110,145 @@ main{}
 
 // PAGES
 
-#about, #dates, #rockets, #pads{
+.about-wrapper, #dates, .rocket-wrapper, .pad-wrapper, .launch-wrapper{
     background: $color-header;
     padding: 15px;
     box-shadow: 0 2px 2px rgba(0,0,0,.3);
     border-bottom: 1px solid $color-brand;
+    opacity: 0.8;
 }
 
 #index{}
 
+#about{
+    font-weight: 300;
+    text-align: center;
+}
+
+#dates{
+    font-size: 12px;
+    padding: 15px;
+    // padding: 5px 15px 0 15px;
+}
+
+#launch{}
+.launch-wrapper,
+.about-wrapper{
+    margin-top: 20px;
+}
+
+.rocket-wrapper, .pad-wrapper{
+    margin-bottom: 20px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
+
+.pad-wrapper{
+    // position: relative;
+}
+
+#map{}
+
+// Rockets Page
+
+.section{
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.weigth-title{
+    color: $color-grey;
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.section-name{
+    color: $color-grey;
+}
+
+.rocket-imagery{
+
+}
+
+.rocket-name, .pad-name{
+    color: $color-brand;
+    font-weight: 300;
+}
+
+.pad-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rocket-desc{}
+.pad-desc{}
+.pad-location{
+    color: $color-grey;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+//
+
+.falcon-9-img{
+    background-image: url("/images/falcon-9.png");
+    background-repeat: no-repeat;
+    background-size: 60px 780px;
+    width: 60px;
+    height: 780px;
+    position: absolute;
+    opacity: 0.3;
+    // left: 20px;
+    left: calc((100vw - 960px)/6);
+    top: 150px;
+}
+.falcon-heavy-img{
+    background-image: url("/images/falcon-heavy.png");
+    background-repeat: no-repeat;
+    background-size: 180px 780px;
+    width: 180px;
+    height: 780px;
+    position: absolute;
+    opacity: 0.3;
+    // right: 20px;
+    right: calc((100vw - 960px)/6);
+    top: 150px;
+}
+
+// Launch Page
+
+.video{
+    display: flex;
+    justify-content: center;
+    iframe{
+        box-shadow: 0 0 5px rgba(0,0,0,.6);
+    }
+}
+
+.launch-details{
+    margin-top: 20px;
+}
+
 // COUNT DOWN
+
+.time-toggle{
+    margin-top: 20px;
+    width: 152px;
+}
+
+.btn-brand{
+    color: $color-text;
+    background: $color-brand;
+    border-color: $color-border;
+    &:hover, &:focus, &:active, &.active{
+        background: darken($color-brand, 15%);
+        border-color: $color-border;
+        box-shadow: none;
+    }
+}
 
 .time{
     margin: auto;
@@ -175,9 +321,8 @@ main{}
 
 .timer{
     margin-top: 20px;
-    // background: yellow;
     display: flex;
-    height: calc(100vh - 201px);
+    height: calc(100vh - 257px);
     align-items: center;
     justify-content: center;
 }
@@ -189,21 +334,32 @@ main{}
 
 // GAME
 
-.rocket{
-    background-image: url("/images/falcon-9.png");
-    background-size: 20px 260px;
-    width: 20px;
-    height: 260px;
-    position: absolute;
-    bottom: -200px;
-    left: calc((100vw - 980px)/4);
-    transition: all 3s ease-in-out 0.5s;
-    cursor: pointer;
-
-    &:hover{
-        bottom: 800px;
-    }
-}
+// .rocket{
+//     background-image: url("/images/falcon-9.png");
+//     background-size: 20px 260px;
+//     width: 20px;
+//     height: 260px;
+//     position: absolute;
+//     bottom: -200px;
+//     left: calc((100vw - 960px)/4);
+//     transition: all 3s ease-in-out 0.5s;
+//     cursor: pointer;
+//
+//     &:hover{
+//         bottom: 800px;
+//     }
+// }
+// .rocket{
+//     background-image: url("/images/falcon-9.png");
+//     background-size: 80px 1040px;
+//     width: 80px;
+//     height: 1040px;
+//     position: absolute;
+//     bottom: -520px;
+//     left: 0;
+//     // left: calc((100vw - 960px)/2);
+//     opacity: 0.1;
+// }
 
 // Over-writing Spectre
 
@@ -212,8 +368,45 @@ a{
     &:hover, &:focus, &:active{
         text-decoration: none;
         color: $color-grey;
-        // color: darken($color-brand, 10%);
         box-shadow: none;
+    }
+}
+
+// .table{ width: 100%;}
+
+.table tr{
+    &:last-child > td {
+        border-bottom: 0;
+    }
+}
+
+.table{
+    table-layout:fixed;
+}
+
+.table td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 0;
+}
+
+.table th{
+    border-bottom-color: #3580B5;
+}
+
+.table-data{
+    cursor: pointer;
+    &:hover{
+        background: darken($color-brand, 15%);
+    }
+}
+
+.table.table-striped tbody tr:nth-of-type(odd) {
+    background: lighten($color-header, 70%);
+    color: #333;
+    &:hover{
+        background: darken($color-brand, 15%);
     }
 }
 
@@ -351,6 +544,13 @@ header.is-open{
         width: 50%;
     }
     .time-icon{
+        display: none;
+    }
+}
+
+@media(max-width: 960px){
+    .falcon-heavy-img,
+    .falcon-9-img{
         display: none;
     }
 }
